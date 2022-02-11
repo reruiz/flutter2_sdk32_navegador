@@ -101,7 +101,8 @@ class _MyAppState extends State<MyApp> {
                   InAppWebView(
                     key: webViewKey,
                     initialUrlRequest: URLRequest(
-                      url: Uri.parse("https://biblioteca.inia.cl/"),
+                      url: Uri.parse(
+                          "https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields"),
                     ),
                     initialOptions: options,
                     pullToRefreshController: pullToRefreshController,
@@ -208,7 +209,8 @@ class _MyAppState extends State<MyApp> {
                   child: Icon(Icons.home, color: Colors.black),
                   style: buttonStyle,
                   onPressed: () {
-                    var url = Uri.parse("https://biblioteca.inia.cl/");
+                    var url = Uri.parse(
+                        "https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields");
                     webViewController?.loadUrl(
                         urlRequest: URLRequest(url: url));
                   },
