@@ -15,4 +15,6 @@ Una característica importante del proyecto actual, es que permite realizar zoom
 
 ![Diseño Básico](assets/app1.png)
 
-**Figura 1.** Vista general de la aplicación
+**Figura 1.** Vista general de la aplicación (v.1.0.0)
+
+

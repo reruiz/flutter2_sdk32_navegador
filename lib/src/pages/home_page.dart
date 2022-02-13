@@ -3,12 +3,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter2_sdk32_navegador/src/providers/url_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:flutter2_sdk32_navegador/src/widgets/a_widget.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter2_sdk32_navegador/src/providers/url_provider.dart';
+
+//import 'package:flutter2_sdk32_navegador/src/widgets/a_widget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -66,103 +67,119 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final urlProvider = Provider.of<UrlProvider>(context, listen: false);
 
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
+    return Scaffold(
+      /*appBar: AppBar(
             title: Text("Agricultura Digital, INIA"),
             backgroundColor: Colors.white60,
             foregroundColor: Colors.black,
           ),
-          drawer: DrawerMenuWidget(),
-          body: SafeArea(
-              //************************************* */
-              child: Column(children: <Widget>[
-            Expanded(
-              child: Stack(
-                children: [
-                  InAppWebView(
-                    key: webViewKey,
-                    initialUrlRequest: URLRequest(
-                      url: Uri.parse(urlProvider.getValor()),
-                    ),
-                    initialOptions: options,
-                    pullToRefreshController: pullToRefreshController,
-                    onWebViewCreated: (controller) {
-                      webViewController = controller;
-                    },
-                    onLoadStart: (controller, url) {
-                      setState(() {
-                        this.url = url.toString();
-                        urlController.text = this.url;
-                      });
-                    },
-                    androidOnPermissionRequest:
-                        (controller, origin, resources) async {
-                      return PermissionRequestResponse(
-                          resources: resources,
-                          action: PermissionRequestResponseAction.GRANT);
-                    },
-                    shouldOverrideUrlLoading:
-                        (controller, navigationAction) async {
-                      var uri = navigationAction.request.url!;
-
-                      if (![
-                        "http",
-                        "https",
-                        "file",
-                        "chrome",
-                        "data",
-                        "javascript",
-                        "about"
-                      ].contains(uri.scheme)) {
-                        if (await canLaunch(url)) {
-                          // Launch the App
-                          await launch(
-                            url,
-                          );
-                          // and cancel the request
-                          return NavigationActionPolicy.CANCEL;
-                        }
-                      }
-
-                      return NavigationActionPolicy.ALLOW;
-                    },
-                    onLoadStop: (controller, url) async {
-                      pullToRefreshController.endRefreshing();
-                      setState(() {
-                        this.url = url.toString();
-                        urlController.text = this.url;
-                      });
-                    },
-                    onLoadError: (controller, url, code, message) {
-                      pullToRefreshController.endRefreshing();
-                    },
-                    onProgressChanged: (controller, progress) {
-                      if (progress == 100) {
-                        pullToRefreshController.endRefreshing();
-                      }
-                      setState(() {
-                        this.progress = progress / 100;
-                        urlController.text = url;
-                      });
-                    },
-                    onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                      setState(() {
-                        this.url = url.toString();
-                        urlController.text = this.url;
-                      });
-                    },
-                    onConsoleMessage: (controller, consoleMessage) {
-                      print(consoleMessage);
-                    },
+       drawer: DrawerMenuWidget(),*/
+      floatingActionButton: Column(
+        children: [
+          SizedBox(height: 50),
+          FloatingActionButton(
+            onPressed: () {
+              var url = Uri.parse(
+                  "https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields");
+              webViewController?.loadUrl(urlRequest: URLRequest(url: url));
+            },
+            child: Icon(Icons.home),
+            backgroundColor: Colors.green,
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+      //floatingActionButtonAnimator: FloatingActionButtonAnimator(),
+      body: SafeArea(
+        //************************************* */
+        child: Column(children: <Widget>[
+          Expanded(
+            child: Stack(
+              children: [
+                InAppWebView(
+                  key: webViewKey,
+                  initialUrlRequest: URLRequest(
+                    url: Uri.parse(urlProvider.getValor()),
                   ),
-                  progress < 1.0
-                      ? LinearProgressIndicator(value: progress)
-                      : Container(),
-                ],
-              ),
+                  initialOptions: options,
+                  pullToRefreshController: pullToRefreshController,
+                  onWebViewCreated: (controller) {
+                    webViewController = controller;
+                  },
+                  onLoadStart: (controller, url) {
+                    setState(() {
+                      this.url = url.toString();
+                      urlController.text = this.url;
+                    });
+                  },
+                  androidOnPermissionRequest:
+                      (controller, origin, resources) async {
+                    return PermissionRequestResponse(
+                        resources: resources,
+                        action: PermissionRequestResponseAction.GRANT);
+                  },
+                  shouldOverrideUrlLoading:
+                      (controller, navigationAction) async {
+                    var uri = navigationAction.request.url!;
+
+                    if (![
+                      "http",
+                      "https",
+                      "file",
+                      "chrome",
+                      "data",
+                      "javascript",
+                      "about"
+                    ].contains(uri.scheme)) {
+                      if (await canLaunch(url)) {
+                        // Launch the App
+                        await launch(
+                          url,
+                        );
+                        // and cancel the request
+                        return NavigationActionPolicy.CANCEL;
+                      }
+                    }
+
+                    return NavigationActionPolicy.ALLOW;
+                  },
+                  onLoadStop: (controller, url) async {
+                    pullToRefreshController.endRefreshing();
+                    setState(() {
+                      this.url = url.toString();
+                      urlController.text = this.url;
+                    });
+                  },
+                  onLoadError: (controller, url, code, message) {
+                    pullToRefreshController.endRefreshing();
+                  },
+                  onProgressChanged: (controller, progress) {
+                    if (progress == 100) {
+                      pullToRefreshController.endRefreshing();
+                    }
+                    setState(() {
+                      this.progress = progress / 100;
+                      urlController.text = url;
+                    });
+                  },
+                  onUpdateVisitedHistory: (controller, url, androidIsReload) {
+                    setState(() {
+                      this.url = url.toString();
+                      urlController.text = this.url;
+                    });
+                  },
+                  onConsoleMessage: (controller, consoleMessage) {
+                    print(consoleMessage);
+                  },
+                ),
+                progress < 1.0
+                    ? LinearProgressIndicator(value: progress)
+                    : Container(),
+              ],
             ),
-          ]))),
+          ),
+        ]),
+      ),
     );
   }
 }
