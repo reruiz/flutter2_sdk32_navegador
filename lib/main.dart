@@ -3,8 +3,14 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:flutter2_sdk32_navegador/src/widgets/a_widget.dart';
+
+import 'src/providers/url_provider.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +19,14 @@ Future main() async {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
 
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UrlProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -71,8 +84,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var buttonStyle = ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-    );
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white));
+
+    final urlProvider = Provider.of<UrlProvider>(context, listen: false);
+
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
@@ -80,29 +95,17 @@ class _MyAppState extends State<MyApp> {
             backgroundColor: Colors.white60,
             foregroundColor: Colors.black,
           ),
+          drawer: DrawerMenuWidget(),
           body: SafeArea(
               //************************************* */
               child: Column(children: <Widget>[
-            TextField(
-              decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
-              controller: urlController,
-              keyboardType: TextInputType.url,
-              onSubmitted: (value) {
-                var url = Uri.parse(value);
-                if (url.scheme.isEmpty) {
-                  url = Uri.parse("https://www.google.com/search?q=" + value);
-                }
-                webViewController?.loadUrl(urlRequest: URLRequest(url: url));
-              },
-            ),
             Expanded(
               child: Stack(
                 children: [
                   InAppWebView(
                     key: webViewKey,
                     initialUrlRequest: URLRequest(
-                      url: Uri.parse(
-                          "https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields"),
+                      url: Uri.parse(urlProvider.getValor()),
                     ),
                     initialOptions: options,
                     pullToRefreshController: pullToRefreshController,
