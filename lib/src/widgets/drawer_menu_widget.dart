@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter2_sdk32_navegador/src/pages/a_pages.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:flutter2_sdk32_navegador/src/providers/url_provider.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
-  const DrawerMenuWidget({Key? key}) : super(key: key);
+  DrawerMenuWidget({Key? key}) : super(key: key);
+
+  final route = MaterialPageRoute(builder: (context) {
+    return HomePage();
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +22,24 @@ class DrawerMenuWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          _DrawerHeader(),
+          //_DrawerHeader(),
+          SizedBox(height: 120),
           ListTile(
             leading: Icon(Icons.pages_outlined),
             title: const Text('Home'),
             onTap: () {
               urlProvider.setValor(
-                  'https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields?utm_source=website&utm_medium=menu_en');
+                  'https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields?utm_source=website&utm_medium=menu_es');
+              Navigator.push(context, route);
             },
           ),
           ListTile(
             leading: Icon(Icons.people_outline),
-            title: const Text('Gente'),
+            title: const Text('Sensores'),
             onTap: () {
               urlProvider.setValor(
-                  'https://app.onesoil.ai/@-40.4042,-68.4861,6z/stations?utm_source=website&utm_medium=menu_en');
+                  'https://app.onesoil.ai/@-40.4042,-68.4861,6z/stations?utm_source=website&utm_medium=menu_es');
+              Navigator.push(context, route);
             },
           ),
           ListTile(
@@ -39,7 +47,8 @@ class DrawerMenuWidget extends StatelessWidget {
             title: const Text('Configuraciónes'),
             onTap: () {
               urlProvider.setValor(
-                  'https://app.onesoil.ai/@-40.4042,-68.4861,6z/sowing?utm_source=website&utm_medium=menu_en');
+                  'https://app.onesoil.ai/@-40.4042,-68.4861,6z/sowing?utm_source=website&utm_medium=menu_es');
+              Navigator.push(context, route);
             },
           ),
         ],
@@ -48,6 +57,7 @@ class DrawerMenuWidget extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _DrawerHeader extends StatelessWidget {
   const _DrawerHeader({
     Key? key,
