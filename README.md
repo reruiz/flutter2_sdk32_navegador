@@ -11,7 +11,7 @@ El complemento se basa en el mecanismo de Flutter para incorporar vistas nativas
 
 Una característica importante del proyecto actual, es que permite realizar zoom sobre la página visitada.
 
-El actual proyecto en su última versión se dirige a la página de la plataforma desarrollada por la empresa onesoil (https://app.onesoil.ai/?utm_source=website&utm_medium=menu_es'). En donde las claves de acceso son: sbest@inia.cl:Cotebenja1
+El actual proyecto en su última versión se dirige a la página de la plataforma desarrollada por la empresa onesoil (https://app.onesoil.ai/?utm_source=website&utm_medium=menu_es').
 
 
 ## Creación de una APK.
