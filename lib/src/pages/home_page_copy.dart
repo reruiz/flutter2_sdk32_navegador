@@ -1,3 +1,4 @@
+/*
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print
 
 import 'dart:io';
@@ -8,8 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter2_sdk32_navegador/src/providers/url_provider.dart';
-
-import '../widgets/floats_buttons_widget.dart';
 
 //import 'package:flutter2_sdk32_navegador/src/widgets/a_widget.dart';
 
@@ -79,9 +78,19 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: Column(
         children: [
           SizedBox(height: 50),
-          FloatsButtonsWidget(),
+          FloatingActionButton(
+            onPressed: () {
+              var url = Uri.parse(
+                  "https://app.onesoil.ai/@-40.4042,-68.4861,6z/fields");
+              webViewController?.loadUrl(urlRequest: URLRequest(url: url));
+            },
+            child: Icon(Icons.home),
+            backgroundColor: Colors.green,
+          ),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      //floatingActionButtonAnimator: FloatingActionButtonAnimator(),
       body: SafeArea(
         //************************************* */
         child: Column(children: <Widget>[
@@ -174,4 +183,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
+}*/
