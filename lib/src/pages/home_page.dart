@@ -67,19 +67,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final urlProvider = Provider.of<UrlProvider>(context, listen: false);
+    final urlsProvider = Provider.of<UrlProvider>(context, listen: false);
 
     return Scaffold(
-      /*appBar: AppBar(
-            title: Text("Agricultura Digital, INIA"),
-            backgroundColor: Colors.white60,
-            foregroundColor: Colors.black,
-          ),
-       drawer: DrawerMenuWidget(),*/
       floatingActionButton: Column(
         children: [
           SizedBox(height: 50),
-          FloatsButtonsWidget(),
+          FloatsButtonsWidget(
+            active: urlsProvider.getActive(),
+            onPressed_1: () {
+              webViewController?.loadUrl(
+                  urlRequest: URLRequest(url: urlsProvider.getUris()[0]));
+              urlsProvider.setActive(0);
+            },
+            onPressed_2: () {
+              webViewController?.loadUrl(
+                  urlRequest: URLRequest(url: urlsProvider.getUris()[1]));
+              urlsProvider.setActive(1);
+            },
+            onPressed_3: () {
+              webViewController?.loadUrl(
+                  urlRequest: URLRequest(url: urlsProvider.getUris()[2]));
+              urlsProvider.setActive(2);
+            },
+            onPressed_4: () {
+              webViewController?.loadUrl(
+                  urlRequest: URLRequest(url: urlsProvider.getUris()[3]));
+              urlsProvider.setActive(3);
+            },
+          ),
         ],
       ),
       body: SafeArea(
@@ -91,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
-                    url: Uri.parse(urlProvider.getValor()),
+                    url: urlsProvider.getUris()[0],
                   ),
                   initialOptions: options,
                   pullToRefreshController: pullToRefreshController,
