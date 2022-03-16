@@ -34,8 +34,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'OneSoil-INIA',
-      initialRoute: 'home',
-      routes: {'home': (context) => HomePage()},
+      initialRoute: 'settings',
+      routes: {
+        'home': (context) => HomePage(),
+        'settings': (context) => SettingsPage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
