@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter2_sdk32_navegador/src/theme/app_theme.dart';
 import 'floats_buttons/animated_floating_buttons.dart';
 
 class FloatsButtonsWidget extends StatefulWidget {
@@ -33,8 +34,8 @@ class _FloatsButtonsWidgetState extends State<FloatsButtonsWidget> {
     return AnimatedFloatingActionButton(
       key: key,
       fabButtons: <Widget>[page1(), page2(), page3(), settingsPages()],
-      colorStartAnimation: Colors.green,
-      colorEndAnimation: Colors.green.shade700,
+      colorStartAnimation: AppTheme.accent,
+      colorEndAnimation: AppTheme.accent,
       animatedIconData: AnimatedIcons.menu_close,
       spaceBetween: -5.0,
     );

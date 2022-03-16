@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter2_sdk32_navegador/src/theme/app_theme.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -33,13 +34,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'OneSoil-INIA',
+      title: 'Smart-INIA',
       initialRoute: 'settings',
       routes: {
         'home': (context) => HomePage(),
         'settings': (context) => SettingsPage(),
       },
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme, //Clase creada en lib\src\theme\app_theme.dart
     );
   }
 }

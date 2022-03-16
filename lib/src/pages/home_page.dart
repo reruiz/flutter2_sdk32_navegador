@@ -90,11 +90,7 @@ class _HomePageState extends State<HomePage> {
                   urlRequest: URLRequest(url: urlsProvider.getUris()[2]));
               urlsProvider.setActive(2);
             },
-            onPressed_4: () {
-              webViewController?.loadUrl(
-                  urlRequest: URLRequest(url: urlsProvider.getUris()[3]));
-              urlsProvider.setActive(3);
-            },
+            onPressed_4: () {},
           ),
         ],
       ),
