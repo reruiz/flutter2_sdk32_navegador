@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UrlProvider extends ChangeNotifier {
-  String _valor =
-      'https://app.onesoil.ai/?utm_source=website&utm_medium=menu_es';
+  String _valor = 'http://www.teleasesoria.cl/#/';
 
   setValor(String valor) {
     _valor = valor;
