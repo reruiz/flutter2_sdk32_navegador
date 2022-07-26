@@ -2,7 +2,7 @@
     package="com.example.flutter2_sdk32_navegador">
    <application
         android:label="Teleasesoria"
-        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
@@ -32,4 +32,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
